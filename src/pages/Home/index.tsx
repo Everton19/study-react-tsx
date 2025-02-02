@@ -8,7 +8,8 @@ function Home() {
       <input type="text" placeholder="Digite seu nome.." />
       <button>Adicionar</button>
 
-      <Card />
+      <Card name="Faisca" time="10:55:12" />
+      <Card name="Everton" time="12:52:14" />
     </div>
   )
 }
