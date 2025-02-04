@@ -1,10 +1,14 @@
 import "./style.scss"
 import { Card } from "../../components/Card"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function Home() {
   const [studentName, setStudentName] = useState("");
   const [students, setStudents] = useState([]);
+  const [user, setUser] = useState({
+    name: '',
+    avatar: ''
+  });
 
   function handleAddStudent() {
     const newStudent = {
@@ -21,14 +25,27 @@ function Home() {
     );
   }
 
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("https://api.github.com/users/everton19");
+      const data = await response.json();
+      setUser({
+        name: data.name,
+        avatar: data.avatar_url
+      });
+    }
+
+    fetchData();
+  }, [])
+
   return (
     <div className="container">
       
       <header>
           <h1>Lista de presença</h1>
         <div>
-          <strong>Everton</strong>
-          <img src="https://cdn.myanimelist.net/images/characters/15/559134.jpg"/>
+          <strong>{user.name}</strong>
+          <img src={user.avatar}/>
         </div>
       </header>
       
